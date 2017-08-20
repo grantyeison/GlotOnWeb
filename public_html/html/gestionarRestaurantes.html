@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Gestionar Restaurantes</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- librerias bootstrap-->
+        <link rel="stylesheet" href="../css/bootstrap.min.css" /><!---->
+        <link rel="stylesheet" href="../css/estilos.css" /><!---->
+        <script src="../js/estilos/jquery-3.2.1.js"></script>
+        <script src="../js/estilos/bootstrap.min.js"></script>
+        <script src="../js/Manejadores/Restaurante.js"></script>
+        
+        <!-- FireBase -->
+        
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCzi7LP0fLEKS7fVO2zEJoKQ37QEy0zK8g",
+        authDomain: "gloton-7c460.firebaseapp.com",
+        databaseURL: "https://gloton-7c460.firebaseio.com",
+        projectId: "gloton-7c460",
+        storageBucket: "gloton-7c460.appspot.com",
+        messagingSenderId: "219936064300"
+      };
+      firebase.initializeApp(config);
+    </script>
+        
+    </head>
+    <body>
+        <p class="page-header">Gestionar Restaurantes</p>
+        <div class="container">
+            <div class="col-sm-7">
+                <!--tabla listar Restaurantes-->
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nit</th>
+                            <th>Restaurante</th>
+                            <th>Dueño</th>
+                            <th>Dirección</th>
+                            <th>Teléfono</th>
+                            <th colspan="3">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblRestaurantes">
+                        
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-1">
+                <!--espacio para serparar-->
+            </div>
+            <div class="col-sm-4">
+                <!--formulario para crear y editar-->
+                <form id="formRestaurante">
+                    <div class="form-group">
+                        <label for="NitRest">Nit</label>
+                        <input type="text" class="form-control" name="NitR" value="" id="NitRest">
+                    </div>
+                    <div class="form-group">
+                        <label for="NomRest">Nombre</label>
+                        <input type="text" class="form-control" name="NomR" value="" id="NomRest">
+                    </div>
+                    <div class="form-group">
+                        <label for="DueRest">Dueño</label>
+                        <input type="text" class="form-control" name="DueR" value="" id="DueRest">
+                    </div>
+                    <div class="form-group">
+                        <label for="DirRest">Dirección</label>
+                        <input type="text" class="form-control" name="DirR" value="" id="DirRest">
+                    </div>
+                    <div class="form-group">
+                        <label for="TelRest">Teléfono</label>
+                        <input type="text" class="form-control" name="TelR" value="" id="TelRest">
+                    </div>
+                    <input type="button" value="Guardar" id="btnGuardarRest" class="btn btn-info">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
