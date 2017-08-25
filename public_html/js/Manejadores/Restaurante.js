@@ -49,18 +49,18 @@ function cargarRegistrosFiBa()
        for (var key in datos)
        {
            filas += "<tr>" +
-                        "<td>" + datos[key].Nit+ "<td>" +
-                        "<td>" + datos[key].Nombre+ "<td>" +
-                        "<td>" + datos[key].Dueño+ "<td>" +
-                        "<td>" + datos[key].Direccion+ "<td>" +
-                        "<td>" + datos[key].Telefono+ "<td>" +
-                        '<td> <button class = "btn btn-danger borrar" data='+key+'> <span class="glyphicon glyphicon-trash"></span> </button> <td>' +
-                        "<td><td>" +
+                        "<td>" + datos[key].Nit+ "</td>" +
+                        "<td>" + datos[key].Nombre+ "</td>" +
+                        "<td>" + datos[key].Dueño+ "</td>" +
+                        "<td>" + datos[key].Direccion+ "</td>" +
+                        "<td>" + datos[key].Telefono+ "</td>" +
+                        '<td> <button class = "btn btn-danger borrar" data='+key+'> <span class=" glyphicon glyphicon-trash "></span> </button> </td>' +
+                        "<td></td>" +
                    "</tr>";
        }
        console.log(filas);
        tblRestaurantes.innerHTML = filas;
-       if (filas != "")
+       if (filas !== "")
        {
             elementosBorrables = document.getElementsByClassName("borrar");
             for (var i=0; i<elementosBorrables.length; i++)
@@ -76,8 +76,8 @@ function borrarRestaurante()
 {
     var keyBorrar = this.getAttribute("data");
     var RestauranteBorrar = refRestaurantes.child(keyBorrar);
-    alert (RestauranteBorrar.Nombre);
-    //RestauranteBorrar.delete();
+    RestauranteBorrar.delete();
+    alert("Elemento eliminado");
 }
 
 });
