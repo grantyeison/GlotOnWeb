@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Gestionar Restaurantes</title>
+        <title>Gestionar Platos</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- librerias bootstrap-->
@@ -14,7 +14,7 @@ and open the template in the editor.
         <link rel="stylesheet" href="../css/estilos.css" /><!---->
         <script src="../js/estilos/jquery-3.2.1.js"></script>
         <script src="../js/estilos/bootstrap.min.js"></script>
-        <script src="../js/Manejadores/Restaurante.js"></script>
+        <script src="../js/Manejadores/Plato.js"></script>
         
         <!-- FireBase -->
         
@@ -34,22 +34,21 @@ and open the template in the editor.
         
     </head>
     <body>
-        <p class="page-header">Gestionar Restaurantes</p>
+        <p class="page-header">Gestionar Plato</p>
         <div class="container">
             <div class="col-sm-7">
                 <!--tabla listar Restaurantes-->
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Nit</th>
-                            <th>Restaurante</th>
-                            <th>Dueño</th>
-                            <th>Dirección</th>
-                            <th>Teléfono</th>
+                            <th>Nombre</th>
+                            <th>URL Imagen</th>
+                            <th>Estado</th>
+                            <th>Categoría</th>
                             <th colspan="3">Acciones</th>
                         </tr>
                     </thead>
-                    <tbody id="tblRestaurantes">
+                    <tbody id="tblPlatos">
                         
                     </tbody>
                 </table>
@@ -59,29 +58,24 @@ and open the template in the editor.
             </div>
             <div class="col-sm-4">
                 <!--formulario para crear y editar-->
-                <form id="formRestaurante">
+                <form id="formPlato">
                     <div class="form-group">
-                        <label for="NitRest">Nit</label>
-                        <input type="text" class="form-control" name="NitR" value="" id="NitRest">
+                        <label for="NombrePlato">Nombre</label>
+                        <input type="text" class="form-control" name="NombrePlato" value="" id="NombrePlato">
                     </div>
                     <div class="form-group">
-                        <label for="NomRest">Nombre</label>
-                        <input type="text" class="form-control" name="NomR" value="" id="NomRest">
+                        <label for="ImagenPlato">URL Imagen</label>
+                        <input type="text" class="form-control" name="ImagenPlato" value="" id="ImagenPlato">
                     </div>
                     <div class="form-group">
-                        <label for="DueRest">Dueño</label>
-                        <input type="text" class="form-control" name="DueR" value="" id="DueRest">
+                        <label for="EstadoPlato">Estado</label>
+                        <input type="text" class="form-control" name="EstadoPlato" value="" id="EstadoPlato">
                     </div>
                     <div class="form-group">
-                        <label for="DirRest">Dirección</label>
-                        <input type="text" class="form-control" name="DirR" value="" id="DirRest">
+                        <label for="CategoriaPlato">Categoría</label>
+                        <input type="text" class="form-control" name="CategoriaPlato" value="" id="CategoriaPlato">
                     </div>
-                    <div class="form-group">
-                        <label for="TelRest">Teléfono</label>
-                        <input type="text" class="form-control" name="TelR" value="" id="TelRest">
-                    </div>
-                    <input type="button" value="Guardar" id="btnGuardarRest" class="btn btn-info">
-                    <input type="button" value="Cancelar" id="btnResetRest" class="btn btn-info">
+                    <input type="button" value="Guardar" id="btnGuardarPlato" class="btn btn-info">
                 </form>
             </div>
         </div>
