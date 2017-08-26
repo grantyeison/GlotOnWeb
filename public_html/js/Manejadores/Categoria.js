@@ -74,7 +74,7 @@ function cargarRegistrosFiBa()
                         "<td>" + datos[key].cat_Nombre+ "</td>";
                 if (datos[key].cat_Imagen !=="")
                 {
-                    filas += "<td>" + "Imagen" + "<td>";
+                    filas += "<td>" + "Imagen" + "</td>";
                 }
                 else
                 {
