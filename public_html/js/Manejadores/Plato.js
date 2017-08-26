@@ -11,15 +11,16 @@ $(document).ready(function ()
     var refPlatos = firebase.database().ref().child("GlotOn").child("Plato");
     cargarRegistrosFiBa();
     var tblPlatos = document.getElementById("tblPlatos");
-    
+    var select=document.getElementById("cbCategoria");
+    //select.addEventListener("click", cargarCBBox, false);    
     
     $('#btnGuardarPlato').click(function (event) 
     {
         event.preventDefault();
         var nombre = document.getElementById("NombrePlato");
         var imagen = document.getElementById("ImagenPlato");
-        var estado = document.getElementById("EstadoPlato");
-        var categoria = document.getElementById("CategoriaPlato");
+        var estado = document.getElementById("cbEstado");
+        var categoria = document.getElementById("cbCategoria");
 
         refPlatos.push({
             Nombre: nombre.value,
@@ -62,6 +63,19 @@ function cargarRegistrosFiBa()
             }
        }
        
+    });
+    
+    //sección de llenado del comboBox (dropdownList)
+    var refCat = firebase.database().ref().child("GlotOn").child("Categoria");
+    var consultaCategorias;
+    var opcion= document.getElementById("cbCategoria");//nombre del comboBox en el html
+    refCat.orderByChild("cat_Nombre").on("child_added", function(snapshot)//función para la consulta
+    {
+        consultaCategorias=snapshot.val();
+        var nOpcion= document.createElement("option");//el tipo de elemento html a crear
+        nOpcion.value=consultaCategorias.cat_Nombre;
+        nOpcion.text=consultaCategorias.cat_Nombre;
+        opcion.appendChild(nOpcion);
     });
 }
 
