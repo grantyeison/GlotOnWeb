@@ -18,6 +18,7 @@ $(document).ready(function () {
     //carga de datos que se encuentran en Firebase
     cargarRegistrosFiBa();
     
+    
     $('#btnResetCarta').click(function(event){
         document.getElementById("RestCarta").value = "";
         document.getElementById("IngCarta").value = "";
@@ -54,9 +55,6 @@ $(document).ready(function () {
                 Restaurante: restaurante.value,
                 Ingredientes: ingredientes.value,
                 Estado: estado.value,
-                Latitud: latitud.value,
-                Logo: imagen.value,
-                Longitud: longitud.value,
                 Plato: plato.value,
                 Descripcion: descripcion.value,
                 Precio: precio.value
@@ -68,9 +66,6 @@ $(document).ready(function () {
         plato.value = "";
         descripcion.value = "";
         precio.value = "";
-        imagen.value = "";
-        latitud.value = "";
-        longitud.value = "";
         estado.value = "";
         document.getElementById("btnGuardarCarta").value = "Guardar";
         accionGuardar = "guardar";
@@ -89,18 +84,7 @@ function cargarRegistrosFiBa()
                         "<td>" + datos[key].Descripcion+ "</td>" +
                         "<td>" + datos[key].Ingredientes+ "</td>" +
                         "<td>" + datos[key].Restaurante+ "</td>" +
-                        "<td>" + datos[key].Precio+ "</td>";
-                if (datos[key].Logo !== "")
-                {
-                    filas += "<td>" + "Logo" + "</td>";
-                }
-                else
-                {
-                    filas += "<td>" + "" + "</td>";
-                }
-                        
-                filas += "<td>" + datos[key].Latitud+ "</td>" +
-                        "<td>" + datos[key].Longitud+ "</td>" +
+                        "<td>" + datos[key].Precio+ "</td>" +
                         "<td>" + datos[key].Estado+ "</td>" +
                         '<td> <button class = "btn btn-danger borrar" data='+key+'> <span class=" glyphicon glyphicon-trash "></span> </button> </td>' +
                         '<td> <button class = "btn btn-info editar" data='+key+'> <span class=" glyphicon glyphicon-pencil "></span> </button> </td>' +
@@ -130,9 +114,6 @@ function cargarCarta()
     var plato = document.getElementById("PlatoCarta");
     var descripcion = document.getElementById("DescCarta");
     var precio = document.getElementById("PrecCarta");
-    var imagen = document.getElementById("LogCarta");
-    var longitud = document.getElementById("LonCarta");
-    var latitud = document.getElementById("LatCarta");
     var estado = document.getElementById("EstCarta");
     
     var keyBuscar = this.getAttribute("data");
@@ -144,9 +125,6 @@ function cargarCarta()
         plato.value = datos.Plato;
         descripcion.value = datos.Descripcion;
         precio.value = datos.Precio;
-        imagen.value = datos.Logo;
-        longitud.value = datos.Longitud;
-        latitud.value = datos.Latitud;
         estado.value = datos.Estado;
     });
     document.getElementById("btnGuardarCarta").value = "Editar restaurante";
@@ -160,43 +138,6 @@ function borrarCarta()
     CartaBorrar.remove();
 }
 
-    function subirImagen()
-    {
-        var nombreImagen = document.getElementById("PlatoCarta").value;
-        if (nombreImagen === "")
-        {
-            alert("Debe asignar un nombre al Carta");
-        }
-        else
-        {
-            //imagen seleccionada con el input
-            var imagen = fichero.files[0];
-            //linea de código para subir una imagen a firebase, en la carpeta "Carta" y con su nombre propio
-            var uploadTask = storageRef.child('Carta/'+'Logo'+nombreImagen).put(imagen);
-            var url = document.getElementById("LogCarta");
-
-            uploadTask.on('state_changed', function(snapshot){
-                //barra de progreso de la subida de la imagen
-              var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-              console.log('Upload is ' + progress + '% done');
-              switch (snapshot.state) {
-                case firebase.storage.TaskState.PAUSED: // or 'paused'
-                  console.log('Upload is paused');
-                  break;
-                case firebase.storage.TaskState.RUNNING: // or 'running'
-                  console.log('Upload is running');
-                  break;
-              }
-            }, function(error) {
-              // gestionar error
-              alert("se ha presentado un inconveniente con el proceso de subida");
-            }, function() {
-              // cuando se ha subido exitosamente la imagen
-              var downloadURL = uploadTask.snapshot.downloadURL;
-              url.value = downloadURL;
-            });
-        }
-    }
 
 });
 

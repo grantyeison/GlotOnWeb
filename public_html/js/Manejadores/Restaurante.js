@@ -115,6 +115,7 @@ function cargarRegistrosFiBa()
                         "<td>" + datos[key].Estado+ "</td>" +
                         '<td> <button class = "btn btn-danger borrar" data='+key+'> <span class=" glyphicon glyphicon-trash "></span> </button> </td>' +
                         '<td> <button class = "btn btn-info editar" data='+key+'> <span class=" glyphicon glyphicon-pencil "></span> </button> </td>' +
+                        '<td> <button class = "btn btn-info seleccionar" data='+key+'> <span class=" glyphicon glyphicon-ok "></span> </button> </td>' +
                         "<td></td>" +
                    "</tr>";
        }
@@ -124,14 +125,30 @@ function cargarRegistrosFiBa()
        {
             elementosBorrables = document.getElementsByClassName("borrar");
             elementosEditables = document.getElementsByClassName("editar");
+            elementosSeleccionables = document.getElementsByClassName("seleccionar");
             for (var i=0; i<elementosBorrables.length; i++)
             {
                 elementosBorrables[i].addEventListener("click", borrarRestaurante, false);
                 elementosEditables[i].addEventListener("click", cargarRestaurante, false);
+                elementosSeleccionables[i].addEventListener("click", seleccionarCarta, false);
             }
        }
        
     });
+}
+
+function seleccionarCarta()
+{
+    window.location = "gestionarCaracteristicasPlato.html";
+    /*
+    var codigoRest = this.getAttribute("data");
+    
+    objetoInputCodigoRest = document.getElementById("idRest");
+      // dar el valor que ha recibido la función
+    objetoInputCodigoRest.value = codigoRest;
+
+      // enviar el formulario
+    document.formCodRest.submit();*/
 }
 
 function cargarRestaurante()
