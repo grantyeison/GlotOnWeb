@@ -10,10 +10,18 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- librerias bootstrap-->
-        <link rel="stylesheet" href="../css/bootstrap.min.css" /><!---->
+         <!-- estilos -->
         <link rel="stylesheet" href="../css/estilos.css" /><!---->
         <script src="../js/estilos/jquery-3.2.1.js"></script>
-        <script src="../js/estilos/bootstrap.min.js"></script>
+        
+        <!-- librerias bootstrap-->
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        
         <script src="../js/Manejadores/Categoria.js"></script>
         
         <!-- FireBase -->
@@ -63,12 +71,26 @@ and open the template in the editor.
                         <input type="text" class="form-control" name="NomCateg" value="" id="NomCateg">
                     </div>
                     <div class="form-group">
-                        <label for="UrlCateg">Url Imagen</label>
-                        <input type="text" class="form-control" name="UrlCateg" value="" id="UrlCateg">
-                    </div>
+                        <label for="UrlCateg">Imagen</label>
+                        <table class="tblCentfull">
+                            <tr>
+                                <td><input type="text" class="form-control" disabled="disabled" value="" id="UrlCateg"></td>
+                                <td>
+                                    <label class="btn btn-file">
+                                        <input type="file" id="ficheroCategoria" class="hidden">
+                                        <img src="../img/upload.png" alt="Subir" class="img-responsive" width="30" height="30">
+                                    </label> 
+                                </td>
+                            </tr>
+                        </table>
+                        
+                        </div>
                     <div class="form-group">
                         <label for="EstadoCateg">Estado</label>
-                        <input type="text" class="form-control" name="EstadoCateg" value="" id="EstadoCateg">
+                        <select class="form-control" id="EstadoCateg">
+                            <option value="Activo">Activo</option>
+                            <option value="Inactivo">Inactivo</option>
+                        </select>
                     </div>
                     <input type="button" value="Guardar" id="btnGuardarCateg" class="btn btn-info">
                 </form>
