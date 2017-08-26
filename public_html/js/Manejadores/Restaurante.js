@@ -8,12 +8,18 @@
     
 $(document).ready(function () {
     //variables para la conexión con firebase
-    //hasta .ref() obtiene la raiz de la base de datos, de ahí el .child dice que 
     var refRestaurantes = firebase.database().ref().child("GlotOn").child("Restaurante");
-    cargarRegistrosFiBa();
+    var storageRef = firebase.storage().ref().child("GlotOn");
+    //variables iniciales
     var tblRestaurantes = document.getElementById("tblRestaurantes");
+    var fichero = document.getElementById("ficheroRestaurante");
+    //variables auxiliares
     var accionGuardar = "guardar";
     var RestauranteEditar;
+    //carga de datos que se encuentran en Firebase
+    cargarRegistrosFiBa();
+    //inicialización de variables listener
+    fichero.addEventListener("change", subirImagen, false);
     
     $('#btnResetRest').click(function(event){
         document.getElementById("DirRest").value = "";
@@ -32,18 +38,19 @@ $(document).ready(function () {
         var nit = document.getElementById("NitRest");
         var nombre = document.getElementById("NomRest");
         var telefono = document.getElementById("TelRest");
-        var latitud = 0;
-        var longitud = 0;
-        var imagen = "";
+        var imagen = document.getElementById("LogRest");
+        var longitud = document.getElementById("LonRest");
+        var latitud = document.getElementById("LatRest");
+        var estado = document.getElementById("EstRest");
         if (accionGuardar === "editar")
         {
             RestauranteEditar.update({
                 Direccion: direccion.value,
                 Dueño: dueño.value,
-                Estado: 1,
-                Latitud: latitud,
-                Logo: imagen,
-                Longitud: longitud,
+                Estado: estado.value,
+                Latitud: latitud.value,
+                Logo: imagen.value,
+                Longitud: longitud.value,
                 Nit: nit.value,
                 Nombre: nombre.value,
                 Telefono: telefono.value
@@ -54,10 +61,10 @@ $(document).ready(function () {
             refRestaurantes.push({
                 Direccion: direccion.value,
                 Dueño: dueño.value,
-                Estado: 1,
-                Latitud: latitud,
-                Logo: imagen,
-                Longitud: longitud,
+                Estado: estado.value,
+                Latitud: latitud.value,
+                Logo: imagen.value,
+                Longitud: longitud.value,
                 Nit: nit.value,
                 Nombre: nombre.value,
                 Telefono: telefono.value
@@ -69,6 +76,10 @@ $(document).ready(function () {
         nit.value = "";
         nombre.value = "";
         telefono.value = "";
+        imagen.value = "";
+        latitud.value = "";
+        longitud.value = "";
+        estado.value = "";
         document.getElementById("btnGuardarRest").value = "Guardar";
         accionGuardar = "guardar";
     });
@@ -86,7 +97,19 @@ function cargarRegistrosFiBa()
                         "<td>" + datos[key].Nombre+ "</td>" +
                         "<td>" + datos[key].Dueño+ "</td>" +
                         "<td>" + datos[key].Direccion+ "</td>" +
-                        "<td>" + datos[key].Telefono+ "</td>" +
+                        "<td>" + datos[key].Telefono+ "</td>";
+                if (datos[key].Logo !== "")
+                {
+                    filas += "<td>" + "Logo" + "</td>";
+                }
+                else
+                {
+                    filas += "<td>" + "" + "</td>";
+                }
+                        
+                filas += "<td>" + datos[key].Latitud+ "</td>" +
+                        "<td>" + datos[key].Longitud+ "</td>" +
+                        "<td>" + datos[key].Estado+ "</td>" +
                         '<td> <button class = "btn btn-danger borrar" data='+key+'> <span class=" glyphicon glyphicon-trash "></span> </button> </td>' +
                         '<td> <button class = "btn btn-info editar" data='+key+'> <span class=" glyphicon glyphicon-pencil "></span> </button> </td>' +
                         "<td></td>" +
@@ -115,6 +138,10 @@ function cargarRestaurante()
     var nit = document.getElementById("NitRest");
     var nombre = document.getElementById("NomRest");
     var telefono = document.getElementById("TelRest");
+    var imagen = document.getElementById("LogRest");
+    var longitud = document.getElementById("LonRest");
+    var latitud = document.getElementById("LatRest");
+    var estado = document.getElementById("EstRest");
     
     var keyBuscar = this.getAttribute("data");
     RestauranteEditar = refRestaurantes.child(keyBuscar);
@@ -125,6 +152,10 @@ function cargarRestaurante()
         nit.value = datos.Nit;
         nombre.value = datos.Nombre;
         telefono.value = datos.Telefono;
+        imagen.value = datos.Logo;
+        longitud.value = datos.Longitud;
+        latitud.value = datos.Latitud;
+        estado.value = datos.Estado;
     });
     document.getElementById("btnGuardarRest").value = "Editar restaurante";
     accionGuardar = "editar";
@@ -136,6 +167,44 @@ function borrarRestaurante()
     var RestauranteBorrar = refRestaurantes.child(keyBorrar);
     RestauranteBorrar.remove();
 }
+
+    function subirImagen()
+    {
+        var nombreImagen = document.getElementById("NitRest").value;
+        if (nombreImagen === "")
+        {
+            alert("Debe asignar un nombre al Restaurante");
+        }
+        else
+        {
+            //imagen seleccionada con el input
+            var imagen = fichero.files[0];
+            //linea de código para subir una imagen a firebase, en la carpeta "Restaurante" y con su nombre propio
+            var uploadTask = storageRef.child('Restaurante/'+'Logo'+nombreImagen).put(imagen);
+            var url = document.getElementById("LogRest");
+
+            uploadTask.on('state_changed', function(snapshot){
+                //barra de progreso de la subida de la imagen
+              var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              console.log('Upload is ' + progress + '% done');
+              switch (snapshot.state) {
+                case firebase.storage.TaskState.PAUSED: // or 'paused'
+                  console.log('Upload is paused');
+                  break;
+                case firebase.storage.TaskState.RUNNING: // or 'running'
+                  console.log('Upload is running');
+                  break;
+              }
+            }, function(error) {
+              // gestionar error
+              alert("se ha presentado un inconveniente con el proceso de subida");
+            }, function() {
+              // cuando se ha subido exitosamente la imagen
+              var downloadURL = uploadTask.snapshot.downloadURL;
+              url.value = downloadURL;
+            });
+        }
+    }
 
 });
 

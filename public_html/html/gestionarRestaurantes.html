@@ -9,11 +9,20 @@ and open the template in the editor.
         <title>Gestionar Restaurantes</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- librerias bootstrap-->
-        <link rel="stylesheet" href="../css/bootstrap.min.css" /><!---->
+        <!-- estilos -->
         <link rel="stylesheet" href="../css/estilos.css" /><!---->
         <script src="../js/estilos/jquery-3.2.1.js"></script>
-        <script src="../js/estilos/bootstrap.min.js"></script>
+        
+        <!-- librerias bootstrap-->
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        
+        
+        <!-- backend -->
         <script src="../js/Manejadores/Restaurante.js"></script>
         
         <!-- FireBase -->
@@ -34,9 +43,9 @@ and open the template in the editor.
         
     </head>
     <body>
-        <p class="page-header">Gestionar Restaurantes</p>
+        <h1 class="page-header">Gestionar Restaurantes</h1>
         <div class="container">
-            <div class="col-sm-7">
+            <div class="col-sm-7 col-lg-7 col-md-7">
                 <!--tabla listar Restaurantes-->
                 <table class="table table-hover">
                     <thead>
@@ -46,6 +55,10 @@ and open the template in the editor.
                             <th>Dueño</th>
                             <th>Dirección</th>
                             <th>Teléfono</th>
+                            <th>Logo</th>
+                            <th>Latitud</th>
+                            <th>Longitud</th>
+                            <th>Estado</th>
                             <th colspan="3">Acciones</th>
                         </tr>
                     </thead>
@@ -54,10 +67,11 @@ and open the template in the editor.
                     </tbody>
                 </table>
             </div>
-            <div class="col-sm-1">
+            
+            <div class="col-sm-1 col-lg-1 col-md-1">
                 <!--espacio para serparar-->
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-4 col-lg-4 col-md-4">
                 <!--formulario para crear y editar-->
                 <form id="formRestaurante">
                     <div class="form-group">
@@ -80,10 +94,41 @@ and open the template in the editor.
                         <label for="TelRest">Teléfono</label>
                         <input type="text" class="form-control" name="TelR" value="" id="TelRest">
                     </div>
+                    <div class="form-group">
+                        <label for="LonRest">Longitud</label>
+                        <input type="text" class="form-control" value="" id="LonRest">
+                    </div>
+                    <div class="form-group">
+                        <label for="LatRest">Latitud</label>
+                        <input type="text" class="form-control" value="" id="LatRest">
+                    </div>
+                    <div class="form-group">
+                        <label for="LogRest">Logo</label>
+                        <table class="tblCentfull">
+                            <tr>
+                                <td><input type="text" class="form-control" disabled="disabled" value="" id="LogRest"></td>
+                                <td>
+                                    <label class="btn btn-file">
+                                        <input type="file" id="ficheroRestaurante" class="hidden">
+                                        <img src="../img/upload.png" alt="Subir" class="img-responsive" width="30" height="30">
+                                    </label> 
+                                </td>
+                            </tr>
+                        </table>
+                        
+                        </div>
+                    <div class="form-group">
+                        <label for="EstRest">Estado</label>
+                        <select class="form-control" id="EstRest">
+                            <option value="Activo">Activo</option>
+                            <option value="Inactivo">Inactivo</option>
+                        </select>
+                    </div>
                     <input type="button" value="Guardar" id="btnGuardarRest" class="btn btn-info">
                     <input type="button" value="Cancelar" id="btnResetRest" class="btn btn-info">
                 </form>
             </div>
         </div>
+        
     </body>
 </html>
