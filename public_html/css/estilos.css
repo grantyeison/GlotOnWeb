@@ -115,10 +115,10 @@ body{
 .tblCentfull{
     width: 100%;
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 2px;
 }
 .tblCentfull td, tr {
-    padding: 8px;
+    padding: 2px;
 }
 
 .title{
