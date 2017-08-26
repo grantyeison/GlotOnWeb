@@ -27,6 +27,9 @@ $(document).ready(function () {
         document.getElementById("NitRest").value = "";
         document.getElementById("NomRest").value = "";
         document.getElementById("TelRest").value = "";
+        document.getElementById("LonRest").value = "";
+        document.getElementById("LatRest").value = "";
+        document.getElementById("LogRest").value = "";
         document.getElementById("btnGuardarRest").value = "Guardar";
         accionGuardar = "guardar";
     });
