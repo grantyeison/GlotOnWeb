@@ -13,6 +13,7 @@ $(document).ready(function ()
     var tblPlatos = document.getElementById("tblPlatos");
     var select=document.getElementById("cbCategoria");
     //select.addEventListener("click", cargarCBBox, false);    
+    var PlatoEditar;
     
     $('#btnGuardarPlato').click(function (event) 
     {
@@ -21,13 +22,26 @@ $(document).ready(function ()
         var imagen = document.getElementById("ImagenPlato");
         var estado = document.getElementById("cbEstado");
         var categoria = document.getElementById("cbCategoria");
-
-        refPlatos.push({
+        
+        if (accionGuardar === "editar")
+        {
+            PlatoEditar.update({
             Nombre: nombre.value,
             Imagen: imagen.value,
             Estado: estado.value,
             Categoria: categoria.value
         });
+        }
+        else if(accionGuardar === "guardar")
+        {
+            refPlatos.push({
+            Nombre: nombre.value,
+            Imagen: imagen.value,
+            Estado: estado.value,
+            Categoria: categoria.value
+        });
+        }
+        
         nombre.value = "";
         imagen.value = "";
         estado.value = "";
@@ -49,6 +63,7 @@ function cargarRegistrosFiBa()
                         "<td>" + datos[key].Estado+ "</td>" +
                         "<td>" + datos[key].Categoria+ "</td>" +
                         '<td> <button class = "btn btn-danger borrar" data='+key+'> <span class=" glyphicon glyphicon-trash "></span> </button> </td>' +
+                        '<td> <button class = "btn btn-info editar" data='+key+'> <span class=" glyphicon glyphicon-pencil "></span> </button> </td>' +
                         "<td></td>" +
                    "</tr>";
        }
@@ -57,9 +72,11 @@ function cargarRegistrosFiBa()
        if (filas !== "")
        {
             elementosBorrables = document.getElementsByClassName("borrar");
+            elementosEditables = document.getElementsByClassName("editar");
             for (var i=0; i<elementosBorrables.length; i++)
             {
                 elementosBorrables[i].addEventListener("click", borrarPlato, false);
+                elementosEditables[i].addEventListener("click", cargarPlato, false);
             }
        }
        
@@ -78,7 +95,26 @@ function cargarRegistrosFiBa()
         opcion.appendChild(nOpcion);
     });
 }
-
+function cargarPlato()
+{
+    var nombre = document.getElementById("NombrePlato");
+    var imagen = document.getElementById("ImagenPlato");
+    var estado = document.getElementById("cbEstado");
+    var categoria = document.getElementById("cbCategoria");
+    
+    var keyBuscar = this.getAttribute("data");
+    PlatoEditar = refPlatos.child(keyBuscar);
+    PlatoEditar.once("value",function(snap)
+    {
+        var datos = snap.val();
+        nombre.value = datos.Nombre;
+        imagen.value = datos.Imagen;
+        estado.value = datos.Estado;
+        categoria.value = datos.Categoria;
+    });
+    document.getElementById("btnGuardarPlato").value = "Editar plato";
+    accionGuardar = "editar";
+}
 function borrarPlato()
 {
     var keyBorrar = this.getAttribute("data");
