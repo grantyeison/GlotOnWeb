@@ -165,3 +165,7 @@ body{
     height: 169px;
     width: 352px;
 }
+.progress-bar
+{
+    width: 0%;
+}

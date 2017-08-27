@@ -153,7 +153,8 @@ function subirImagen()
         {
             //barra de progreso de la subida de la imagen
             var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log('Upload is ' + progress + '% done');
+            document.getElementById("progreso").className="";
+            document.getElementById("barraProgreso").style.width = progress + "%";
             switch (snapshot.state) 
             {
                 case firebase.storage.TaskState.PAUSED: // or 'paused'
@@ -171,8 +172,8 @@ function subirImagen()
             {
               // cuando se ha subido exitosamente la imagen
               var downloadURL = uploadTask.snapshot.downloadURL;
-              alert(downloadURL);
               url.value = downloadURL;
+              document.getElementById("progreso").className="hidden";
             });
         }
     }
