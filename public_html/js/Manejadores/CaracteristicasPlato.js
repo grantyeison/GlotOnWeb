@@ -104,6 +104,32 @@ function cargarRegistrosFiBa()
             }
        }
        
+       //sección de llenado del comboBox (dropdownList)
+        var refPlatos = firebase.database().ref().child("GlotOn").child("Plato");
+        var consultaPlatos;
+        var opcionPlato= document.getElementById("PlatoCarta");//nombre del comboBox en el html
+        refPlatos.orderByChild("Nombre").on("child_added", function(snapshot)//función para la consulta
+        {
+            consultaPlatos=snapshot.val();
+            var nOpcion= document.createElement("option");//el tipo de elemento html a crear
+            nOpcion.value=consultaPlatos.Nombre;
+            nOpcion.text=consultaPlatos.Nombre;
+            opcionPlato.appendChild(nOpcion);
+        });
+        //Restaurante
+        var refRests = firebase.database().ref().child("GlotOn").child("Restaurante");
+        var consultaRestaurantes;
+        var opcionRest= document.getElementById("RestCarta");//nombre del comboBox en el html
+        refRests.orderByChild("Nombre").on("child_added", function(snapshot)//función para la consulta
+        {
+            consultaRestaurantes=snapshot.val();
+            //alert(snapshot);
+            var nOpcion= document.createElement("option");//el tipo de elemento html a crear
+            nOpcion.value=consultaRestaurantes.Nombre;
+            nOpcion.text=consultaRestaurantes.Nombre;
+            opcionRest.appendChild(nOpcion);
+        });
+       
     });
 }
 
