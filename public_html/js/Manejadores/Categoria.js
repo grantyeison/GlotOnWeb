@@ -138,7 +138,7 @@ function subirImagen()
         //imagen seleccionada con el input
         var imagen = fichero.files[0];
         //linea de código para subir imagen a firebase, en la carpeta "Categoria" y en su nompre propio
-        var uploadTask = storageRef.child('Categoria/'+'Imagen'+'nombreImagen').put(imagen);
+        var uploadTask = storageRef.child('Categoria/'+'Imagen'+nombreImagen).put(imagen);
         var url = document.getElementById("UrlCateg");
         
         uploadTask.on('state_changed', function(snapshot){
