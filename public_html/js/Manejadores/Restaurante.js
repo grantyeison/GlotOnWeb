@@ -141,6 +141,8 @@ function cargarRegistrosFiBa()
 
 function seleccionarCarta()
 {
+    var keyBorrar = this.getAttribute("data");
+    localStorage.setItem("restaurante", keyBorrar);
     window.location = "gestionarCaracteristicasPlato.html";
     alert("El restaurante es: "+this.getAttribute("data"));
     var codigoRest = this.getAttribute("data");

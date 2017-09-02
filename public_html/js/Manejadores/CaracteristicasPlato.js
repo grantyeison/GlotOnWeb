@@ -74,12 +74,15 @@ $(document).ready(function () {
     
 function cargarRegistrosFiBa()
 {
+    var idRest = localStorage.getItem("restaurante");
     refCartas.on("value", function(snap){
        var datos = snap.val();
        var filas = "";
        for (var key in datos)
        {
-           filas += "<tr>" +
+           if (datos[key].Restaurante === idRest)
+           {
+                filas += "<tr>" +
                         "<td>" + datos[key].Plato+ "</td>" +
                         "<td>" + datos[key].Descripcion+ "</td>" +
                         "<td>" + datos[key].Ingredientes+ "</td>" +
@@ -90,6 +93,7 @@ function cargarRegistrosFiBa()
                         '<td> <button class = "btn btn-info editar" data='+key+'> <span class=" glyphicon glyphicon-pencil "></span> </button> </td>' +
                         "<td></td>" +
                    "</tr>";
+           }
        }
        console.log(filas);
        tblCartas.innerHTML = filas;
@@ -125,7 +129,7 @@ function cargarRegistrosFiBa()
             consultaRestaurantes=snapshot.val();
             //alert(snapshot);
             var nOpcion= document.createElement("option");//el tipo de elemento html a crear
-            nOpcion.value=snapshot.key;
+            nOpcion.value=consultaRestaurantes.Key;
             nOpcion.text=consultaRestaurantes.Nombre;
             opcionRest.appendChild(nOpcion);
         });
