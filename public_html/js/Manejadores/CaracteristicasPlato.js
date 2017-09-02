@@ -125,7 +125,7 @@ function cargarRegistrosFiBa()
             consultaRestaurantes=snapshot.val();
             //alert(snapshot);
             var nOpcion= document.createElement("option");//el tipo de elemento html a crear
-            nOpcion.value=consultaRestaurantes.Nombre;
+            nOpcion.value=snapshot.key;
             nOpcion.text=consultaRestaurantes.Nombre;
             opcionRest.appendChild(nOpcion);
         });

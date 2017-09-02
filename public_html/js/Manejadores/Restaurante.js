@@ -9,6 +9,7 @@
 $(document).ready(function () {
     //variables para la conexión con firebase
     var refRestaurantes = firebase.database().ref().child("GlotOn").child("Restaurante");
+    var refPlatos = firebase.database().ref().child("GlotOn").child("caracteristicaPlato");
     var storageRef = firebase.storage().ref().child("GlotOn");
     //variables iniciales
     var tblRestaurantes = document.getElementById("tblRestaurantes");
@@ -90,7 +91,8 @@ $(document).ready(function () {
     
 function cargarRegistrosFiBa()
 {
-    refRestaurantes.on("value", function(snap){
+    refRestaurantes.on("value", function(snap)
+    {
        var datos = snap.val();
        var filas = "";
        for (var key in datos)
@@ -140,6 +142,14 @@ function cargarRegistrosFiBa()
 function seleccionarCarta()
 {
     window.location = "gestionarCaracteristicasPlato.html";
+    alert("El restaurante es: "+this.getAttribute("data"));
+    var codigoRest = this.getAttribute("data");
+    /*refPlatos.child(codigoRest).on("child_added", function(snapshot)//función para la consulta
+    {
+        var resultado=snapshot.val();
+        alert("nombre: "resultado.Nombre);
+        alert("categoria: "resultado.Categoria);
+    });*/
     /*
     var codigoRest = this.getAttribute("data");
     
